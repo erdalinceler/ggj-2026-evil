@@ -16,11 +16,15 @@ public class Entity
     public Dictionary<string, object> fakeValues = new Dictionary<string, object>();
 
     // Cache reflection results to avoid repeated GetFields/GetField calls
-    private static readonly FieldInfo[] cachedFields = typeof(EntityInfo).GetFields();
-    private static readonly Dictionary<string, FieldInfo> cachedFieldsByName = new Dictionary<string, FieldInfo>();
+    private static readonly FieldInfo[] cachedFields;
+    private static readonly Dictionary<string, FieldInfo> cachedFieldsByName;
 
     static Entity()
     {
+        // Initialize both collections in static constructor for thread-safe initialization
+        cachedFields = typeof(EntityInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        cachedFieldsByName = new Dictionary<string, FieldInfo>();
+        
         // Populate the field name lookup dictionary
         foreach (FieldInfo field in cachedFields)
         {
