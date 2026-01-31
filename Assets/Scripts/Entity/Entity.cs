@@ -204,7 +204,7 @@ public class Entity
                 int safety = 0;
                 while (replacement == original && safety < 10)
                 {
-                    replacement = (char)('a' + UnityEngine.Random.Range(0, 26));
+                    replacement = GetRandomCharacterOfSameType(original);
                     safety++;
                 }
                 chars[index] = replacement;
@@ -214,7 +214,7 @@ public class Entity
             if (mutated == value)
             {
                 int index = UnityEngine.Random.Range(0, chars.Length);
-                chars[index] = (char)('a' + UnityEngine.Random.Range(0, 26));
+                chars[index] = GetRandomCharacterOfSameType(chars[index]);
                 mutated = new string(chars);
             }
 
@@ -286,5 +286,29 @@ public class Entity
         }
 
         return realValue;
+    }
+
+    private char GetRandomCharacterOfSameType(char original)
+    {
+        if (char.IsUpper(original))
+        {
+            // Replace uppercase letter with another random uppercase letter
+            return (char)('A' + UnityEngine.Random.Range(0, 26));
+        }
+        else if (char.IsLower(original))
+        {
+            // Replace lowercase letter with another random lowercase letter
+            return (char)('a' + UnityEngine.Random.Range(0, 26));
+        }
+        else if (char.IsDigit(original))
+        {
+            // Replace digit with another random digit
+            return (char)('0' + UnityEngine.Random.Range(0, 10));
+        }
+        else
+        {
+            // For special characters, spaces, etc., return a random lowercase letter as fallback
+            return (char)('a' + UnityEngine.Random.Range(0, 26));
+        }
     }
 }
