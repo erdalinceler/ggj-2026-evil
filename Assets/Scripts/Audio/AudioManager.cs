@@ -12,6 +12,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioSource ambientSource;
 
+    // Runtime volume settings (not persisted to ScriptableObject)
+    private float _currentMusicVolume;
+    private float _currentSFXVolume;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -41,16 +45,21 @@ public class AudioManager : MonoBehaviour
         ambientSource.loop = true;
         sfxSource.playOnAwake = false;
 
+        // Initialize runtime volume settings from ScriptableObject
+        if (audioData != null)
+        {
+            _currentMusicVolume = audioData.musicVolume;
+            _currentSFXVolume = audioData.sfxVolume;
+        }
+
         UpdateVolumes();
     }
 
     public void UpdateVolumes()
     {
-        if (audioData == null) return;
-
-        musicSource.volume = audioData.musicVolume;
-        sfxSource.volume = audioData.sfxVolume;
-        ambientSource.volume = audioData.sfxVolume;
+        musicSource.volume = _currentMusicVolume;
+        sfxSource.volume = _currentSFXVolume;
+        ambientSource.volume = _currentSFXVolume;
     }
 
     public void PlayMusic(AudioClip clip)
@@ -95,19 +104,13 @@ public class AudioManager : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
-        if (audioData != null)
-        {
-            audioData.musicVolume = Mathf.Clamp01(volume);
-            UpdateVolumes();
-        }
+        _currentMusicVolume = Mathf.Clamp01(volume);
+        UpdateVolumes();
     }
 
     public void SetSFXVolume(float volume)
     {
-        if (audioData != null)
-        {
-            audioData.sfxVolume = Mathf.Clamp01(volume);
-            UpdateVolumes();
-        }
+        _currentSFXVolume = Mathf.Clamp01(volume);
+        UpdateVolumes();
     }
 }
