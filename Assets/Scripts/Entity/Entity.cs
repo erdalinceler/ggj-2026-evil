@@ -110,7 +110,7 @@ public class Entity
     {
         if (string.IsNullOrEmpty(name))
         {
-            return (null, false);
+            return (default(T), false);
         }
 
         if (!entityInfoFieldsByName.TryGetValue(name, out FieldInfo field))
