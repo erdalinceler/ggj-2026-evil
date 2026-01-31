@@ -26,3 +26,12 @@ public enum DialogueResult
     Success,
 }
 
+public enum SceneState
+{
+    InMainMenu,
+    IsPlaying,
+    IsPaused,
+}
+
+
+
