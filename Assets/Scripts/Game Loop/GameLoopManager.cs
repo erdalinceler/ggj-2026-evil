@@ -68,7 +68,7 @@ public class GameLoopManager : MonoBehaviour
     private IEnumerator GameLoop()
     {
         // Initialize Game
-        ChangeGameState(GameState.InitiliazingGame);
+        ChangeGameState(GameState.InitializingGame);
         InitializeGame();
         yield return null;
 
