@@ -16,19 +16,19 @@ public class Entity
     public Dictionary<string, object> fakeValues = new Dictionary<string, object>();
 
     // Cache reflection results to avoid repeated GetFields/GetField calls
-    private static readonly FieldInfo[] cachedFields;
-    private static readonly Dictionary<string, FieldInfo> cachedFieldsByName;
+    private static readonly FieldInfo[] entityInfoFields;
+    private static readonly Dictionary<string, FieldInfo> entityInfoFieldsByName;
 
     static Entity()
     {
         // Initialize both collections in static constructor for thread-safe initialization
-        cachedFields = typeof(EntityInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
-        cachedFieldsByName = new Dictionary<string, FieldInfo>();
+        entityInfoFields = typeof(EntityInfo).GetFields(BindingFlags.Public | BindingFlags.Instance);
+        entityInfoFieldsByName = new Dictionary<string, FieldInfo>();
         
         // Populate the field name lookup dictionary
-        foreach (FieldInfo field in cachedFields)
+        foreach (FieldInfo field in entityInfoFields)
         {
-            cachedFieldsByName[field.Name] = field;
+            entityInfoFieldsByName[field.Name] = field;
         }
     }
 
@@ -54,7 +54,7 @@ public class Entity
 
         List<FieldInfo> eligible = new List<FieldInfo>();
 
-        foreach (FieldInfo field in cachedFields)
+        foreach (FieldInfo field in entityInfoFields)
         {
             FalsableAttribute attribute = (FalsableAttribute)Attribute.GetCustomAttribute(field, typeof(FalsableAttribute));
             if (attribute == null)
@@ -88,7 +88,12 @@ public class Entity
 
     public (object, bool) GetDisplayValue(string name)
     {
-        if (!cachedFieldsByName.TryGetValue(name, out FieldInfo field))
+        if (string.IsNullOrEmpty(name))
+        {
+            return (null, false);
+        }
+
+        if (!entityInfoFieldsByName.TryGetValue(name, out FieldInfo field))
         {
             return (null, false);
         }
@@ -103,7 +108,12 @@ public class Entity
 
     public (T, bool) GetVariable<T>(string name) where T: class
     {
-        if (!cachedFieldsByName.TryGetValue(name, out FieldInfo field))
+        if (string.IsNullOrEmpty(name))
+        {
+            return (null, false);
+        }
+
+        if (!entityInfoFieldsByName.TryGetValue(name, out FieldInfo field))
         {
             return (null, false);
         }
