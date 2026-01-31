@@ -15,6 +15,19 @@ public class Entity
     public HashSet<string> falseInfo = new HashSet<string>();
     public Dictionary<string, object> fakeValues = new Dictionary<string, object>();
 
+    // Cache reflection results to avoid repeated GetFields/GetField calls
+    private static readonly FieldInfo[] cachedFields = typeof(EntityInfo).GetFields();
+    private static readonly Dictionary<string, FieldInfo> cachedFieldsByName = new Dictionary<string, FieldInfo>();
+
+    static Entity()
+    {
+        // Populate the field name lookup dictionary
+        foreach (FieldInfo field in cachedFields)
+        {
+            cachedFieldsByName[field.Name] = field;
+        }
+    }
+
     public Entity(EntityState state)
     {
         this.state = state;
@@ -35,10 +48,9 @@ public class Entity
         falseInfo.Clear();
         fakeValues.Clear();
 
-        FieldInfo[] fields = typeof(EntityInfo).GetFields();
         List<FieldInfo> eligible = new List<FieldInfo>();
 
-        foreach (FieldInfo field in fields)
+        foreach (FieldInfo field in cachedFields)
         {
             FalsableAttribute attribute = (FalsableAttribute)Attribute.GetCustomAttribute(field, typeof(FalsableAttribute));
             if (attribute == null)
@@ -72,8 +84,7 @@ public class Entity
 
     public (object, bool) GetDisplayValue(string name)
     {
-        FieldInfo field = typeof(EntityInfo).GetField(name);
-        if (field == null)
+        if (!cachedFieldsByName.TryGetValue(name, out FieldInfo field))
         {
             return (null, false);
         }
@@ -88,8 +99,7 @@ public class Entity
 
     public (T, bool) GetVariable<T>(string name) where T: class
     {
-        FieldInfo field = typeof(EntityInfo).GetField(name);
-        if (field == null)
+        if (!cachedFieldsByName.TryGetValue(name, out FieldInfo field))
         {
             return (null, false);
         }
