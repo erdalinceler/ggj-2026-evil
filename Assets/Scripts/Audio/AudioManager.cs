@@ -13,8 +13,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource ambientSource;
 
     // Runtime volume settings (not persisted to ScriptableObject)
-    private float _currentMusicVolume;
-    private float _currentSFXVolume;
+    private float _currentMusicVolume = 1.0f;
+    private float _currentSFXVolume = 1.0f;
 
     private void Awake()
     {
@@ -57,9 +57,12 @@ public class AudioManager : MonoBehaviour
 
     public void UpdateVolumes()
     {
-        musicSource.volume = _currentMusicVolume;
-        sfxSource.volume = _currentSFXVolume;
-        ambientSource.volume = _currentSFXVolume;
+        if (musicSource != null)
+            musicSource.volume = _currentMusicVolume;
+        if (sfxSource != null)
+            sfxSource.volume = _currentSFXVolume;
+        if (ambientSource != null)
+            ambientSource.volume = _currentSFXVolume;
     }
 
     public void PlayMusic(AudioClip clip)
