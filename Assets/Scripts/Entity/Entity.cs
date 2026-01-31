@@ -72,37 +72,29 @@ public class Entity
 
     public (object, bool) GetDisplayValue(string name)
     {
-        FieldInfo[] fields = typeof(EntityInfo).GetFields();
-
-        foreach (FieldInfo field in fields)
+        FieldInfo field = typeof(EntityInfo).GetField(name);
+        if (field == null)
         {
-            if (field.Name == name)
-            {
-                if (fakeValues.TryGetValue(name, out object fakeValue))
-                {
-                    return (fakeValue, true);
-                }
-
-                return (field.GetValue(entityInfo), false);
-            }
+            return (null, false);
         }
 
-        return (null, false);
+        if (fakeValues.TryGetValue(name, out object fakeValue))
+        {
+            return (fakeValue, true);
+        }
+
+        return (field.GetValue(entityInfo), false);
     }
 
     public (T, bool) GetVariable<T>(string name) where T: class
     {
-        FieldInfo[] fields = typeof(EntityInfo).GetFields();
-
-        foreach (FieldInfo field in fields)
+        FieldInfo field = typeof(EntityInfo).GetField(name);
+        if (field == null)
         {
-            if (field.Name == name)
-            {
-                return (field.GetValue(entityInfo) as T, falseInfo.Contains(name));
-            }
+            return (null, false);
         }
 
-        return (null, false);
+        return (field.GetValue(entityInfo) as T, falseInfo.Contains(name));
     }
 
     private object GenerateFakeValue(FieldInfo field, object realValue)
