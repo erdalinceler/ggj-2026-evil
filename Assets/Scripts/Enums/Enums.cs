@@ -33,5 +33,11 @@ public enum SceneState
     IsPaused,
 }
 
+public enum GameResult
+{
+    Victory,
+    Defeat
+}
+
 
 
