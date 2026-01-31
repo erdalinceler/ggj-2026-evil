@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    private const float DEFAULT_VOLUME = 1.0f;
+
     public static AudioManager Instance { get; private set; }
 
     [Header("References")]
@@ -13,8 +15,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource ambientSource;
 
     // Runtime volume settings (not persisted to ScriptableObject)
-    private float _currentMusicVolume = 1.0f;
-    private float _currentSFXVolume = 1.0f;
+    private float _currentMusicVolume = DEFAULT_VOLUME;
+    private float _currentSFXVolume = DEFAULT_VOLUME;
 
     private void Awake()
     {
