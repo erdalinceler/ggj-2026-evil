@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 
 public class EntityTextService : MonoBehaviour
@@ -94,5 +95,33 @@ public class EntityTextService : MonoBehaviour
             used.Add(selected);
             results.Add(selected);
         }
+    }
+
+    public static string FormatEntityText(string template, Entity entity)
+    {
+        if (string.IsNullOrEmpty(template))
+        {
+            return template;
+        }
+
+        if (entity == null)
+        {
+            return template;
+        }
+
+        // Match placeholders like <name>, <age>, etc.
+        return Regex.Replace(template, @"<(\w+)>", match =>
+        {
+            string fieldName = match.Groups[1].Value;
+            var (value, _) = entity.GetDisplayValue(fieldName);
+            
+            if (value != null)
+            {
+                return value.ToString();
+            }
+            
+            // If the field is not found, keep the original placeholder
+            return match.Value;
+        });
     }
 }
