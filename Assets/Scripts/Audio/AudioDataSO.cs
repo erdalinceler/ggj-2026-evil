@@ -14,7 +14,6 @@ public class AudioDataSO : ScriptableObject
     [Header("UI & Interface")]
     public AudioClip buttonClick;
     public AudioClip buttonHover;
-    public AudioClip pageFlip;
     public AudioClip leverSwitch;
     public AudioClip documentRead;
 
@@ -30,15 +29,12 @@ public class AudioDataSO : ScriptableObject
     [Header("Feedback")]
     public AudioClip correctAnswer;
     public AudioClip wrongAnswer;
-    public AudioClip scoreIncrease;
-    public AudioClip scoreDecrease;
-
+   
     [Header("Game States")]
     public AudioClip roundStart;
     public AudioClip roundEnd;
-    public AudioClip victoryFanfare;
+    public AudioClip winSound;
     public AudioClip defeatSound;
-    public AudioClip perfectBonus;
 
     [Header("Ambient")]
     public AudioClip officeAmbience;
