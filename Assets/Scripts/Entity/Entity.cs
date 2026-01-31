@@ -86,15 +86,21 @@ public class Entity
         return (field.GetValue(entityInfo), false);
     }
 
-    public (T, bool) GetVariable<T>(string name) where T: class
+    public (T, bool) GetVariable<T>(string name)
     {
         FieldInfo field = typeof(EntityInfo).GetField(name);
         if (field == null)
         {
-            return (null, false);
+            return (default(T), false);
         }
 
-        return (field.GetValue(entityInfo) as T, falseInfo.Contains(name));
+        object value = field.GetValue(entityInfo);
+        if (value is T typedValue)
+        {
+            return (typedValue, falseInfo.Contains(name));
+        }
+
+        return (default(T), false);
     }
 
     private object GenerateFakeValue(FieldInfo field, object realValue)
