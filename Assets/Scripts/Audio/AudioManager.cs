@@ -2,6 +2,8 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour
 {
+    private const float DEFAULT_VOLUME = 1.0f;
+
     public static AudioManager Instance { get; private set; }
 
     [Header("References")]
@@ -11,6 +13,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicSource;
     [SerializeField] private AudioSource sfxSource;
     [SerializeField] private AudioSource ambientSource;
+
+    // Runtime volume settings (not persisted to ScriptableObject)
+    private float _currentMusicVolume = DEFAULT_VOLUME;
+    private float _currentSFXVolume = DEFAULT_VOLUME;
 
     private void Awake()
     {
@@ -41,16 +47,24 @@ public class AudioManager : MonoBehaviour
         ambientSource.loop = true;
         sfxSource.playOnAwake = false;
 
+        // Initialize runtime volume settings from ScriptableObject
+        if (audioData != null)
+        {
+            _currentMusicVolume = audioData.musicVolume;
+            _currentSFXVolume = audioData.sfxVolume;
+        }
+
         UpdateVolumes();
     }
 
     public void UpdateVolumes()
     {
-        if (audioData == null) return;
-
-        musicSource.volume = audioData.musicVolume;
-        sfxSource.volume = audioData.sfxVolume;
-        ambientSource.volume = audioData.sfxVolume;
+        if (musicSource != null)
+            musicSource.volume = _currentMusicVolume;
+        if (sfxSource != null)
+            sfxSource.volume = _currentSFXVolume;
+        if (ambientSource != null)
+            ambientSource.volume = _currentSFXVolume;
     }
 
     public void PlayMusic(AudioClip clip)
@@ -95,19 +109,13 @@ public class AudioManager : MonoBehaviour
 
     public void SetMusicVolume(float volume)
     {
-        if (audioData != null)
-        {
-            audioData.musicVolume = Mathf.Clamp01(volume);
-            UpdateVolumes();
-        }
+        _currentMusicVolume = Mathf.Clamp01(volume);
+        UpdateVolumes();
     }
 
     public void SetSFXVolume(float volume)
     {
-        if (audioData != null)
-        {
-            audioData.sfxVolume = Mathf.Clamp01(volume);
-            UpdateVolumes();
-        }
+        _currentSFXVolume = Mathf.Clamp01(volume);
+        UpdateVolumes();
     }
 }
