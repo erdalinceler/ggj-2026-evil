@@ -136,11 +136,14 @@ public class GameLoopManager : MonoBehaviour
         // Create entity with unique ID
         Entity entity = new Entity(randomState, roundIndex + 1);
 
+        // Calculate total count based on difficulty (higher rounds = more false info)
+        int totalCount = minDifficulty + (roundIndex * (maxDifficulty - minDifficulty) / totalRounds);
+
         // Get random entity info from pool
         if (entityInfoPool.Count > 0)
         {
             EntityInfo randomInfo = entityInfoPool[UnityEngine.Random.Range(0, entityInfoPool.Count)];
-            entity.SetVariables(randomInfo, minDifficulty, maxDifficulty);
+            entity.SetVariables(randomInfo, minDifficulty, maxDifficulty, totalCount);
         }
         else
         {
@@ -151,7 +154,7 @@ public class GameLoopManager : MonoBehaviour
                 age = UnityEngine.Random.Range(18, 65),
                 gender = UnityEngine.Random.Range(0, 2) == 0 ? Gender.Male : Gender.Female
             };
-            entity.SetVariables(defaultInfo, minDifficulty, maxDifficulty);
+            entity.SetVariables(defaultInfo, minDifficulty, maxDifficulty, totalCount);
         }
 
         return entity;
