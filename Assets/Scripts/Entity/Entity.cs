@@ -277,8 +277,7 @@ public class Entity
         }
         else
         {
-            // For special characters, spaces, etc., keep the original
-            // or return a random lowercase letter as fallback
+            // For special characters, spaces, etc., return a random lowercase letter as fallback
             return (char)('a' + UnityEngine.Random.Range(0, 26));
         }
     }
