@@ -1,7 +1,7 @@
 public enum GameState
 {
     NotStarted,
-    InitiliazingGame,
+    InitializingGame,
     SpawningDialogues,
     ProcessingQueue,
     AllDialoguesComplete,
