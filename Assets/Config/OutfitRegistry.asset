@@ -14,7 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::OutfitRegistry
   npcOutfits:
   - {fileID: 11400000, guid: 5c547ca287ec75a4498869357aae1181, type: 2}
-  - {fileID: 11400000, guid: 5c547ca287ec75a4498869357aae1181, type: 2}
+  - {fileID: 11400000, guid: 33be88ba40f0b9b40bc2f367687369f2, type: 2}
   specialSprites:
-  - entityId: 0
-    sprite: {fileID: 0}
+  - entityId: 2
+    sprite: {fileID: 21300000, guid: 279a2fb985af7b24bb094ba4d0342829, type: 3}
+  - entityId: 3
+    sprite: {fileID: 21300000, guid: a5cdbefd49d353642a78d80ecd220897, type: 3}
+  - entityId: 4
+    sprite: {fileID: 21300000, guid: c3229a208ad684c4098530f16192101e, type: 3}
+  - entityId: 5
+    sprite: {fileID: 21300000, guid: a6782f598f69cbe4aa6524403fc66f0c, type: 3}
+  - entityId: 6
+    sprite: {fileID: 21300000, guid: 74c99757951f78c498f0044dd80ff392, type: 3}
+  - entityId: 7
+    sprite: {fileID: 21300000, guid: c499343f54214d94f87437a9fedd218e, type: 3}

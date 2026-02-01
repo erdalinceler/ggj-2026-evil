@@ -12,12 +12,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03c00eef63e33514aaeab6e5ff21a9c6, type: 3}
   m_Name: FemaleNPC
   m_EditorClassIdentifier: Assembly-CSharp::NpcOutfitData
-  gender: 0
-  hair: []
-  eye: []
-  body: []
-  cloth: []
-  lips: []
-  eyeBrown: []
+  gender: 1
+  hair:
+  - {fileID: 21300000, guid: 8eb3afb34b668f3428d89a5b924f2fa1, type: 3}
+  - {fileID: 21300000, guid: dead22889618158419c1692eee7ca185, type: 3}
+  - {fileID: 21300000, guid: c5638b60d097ccb4c80bfb623a21e631, type: 3}
+  eye:
+  - {fileID: 21300000, guid: 8d8dc45314c537d4db9cd7c8878af4db, type: 3}
+  - {fileID: 21300000, guid: 344f5103e07d62342be9037bb363de39, type: 3}
+  - {fileID: 21300000, guid: b56ed24b5e80b6b4bafa44da6337a70e, type: 3}
+  body:
+  - {fileID: 21300000, guid: 3ed5bfa153878e049950124c3bcb3080, type: 3}
+  - {fileID: 21300000, guid: 34b6cd9fa40e00c489858e8f6c094957, type: 3}
+  - {fileID: 21300000, guid: f18b52812923ea543a6c3c771c129b20, type: 3}
+  cloth:
+  - {fileID: 21300000, guid: be3d71ec527528448ae696679cfea350, type: 3}
+  - {fileID: 21300000, guid: c3aff7271cc36704ba3607717ca9b298, type: 3}
+  - {fileID: 21300000, guid: 228e3d0ca2905bb4aa04df8034a78f37, type: 3}
+  lips:
+  - {fileID: 21300000, guid: 303bf003d96fc454f95c880910ef796e, type: 3}
+  - {fileID: 21300000, guid: 5abbb92e3abc60945aecd20ba7da2c85, type: 3}
+  - {fileID: 21300000, guid: 204b237f58863444784f066c753d2e72, type: 3}
+  eyeBrown:
+  - {fileID: 21300000, guid: b0fc9fb6ed15feb439265d43947d7fbf, type: 3}
+  - {fileID: 21300000, guid: 3a85272e63a2afd429ed68cebdbea9fe, type: 3}
+  - {fileID: 21300000, guid: d72b02f35d15d3e4a87df992149268d5, type: 3}
   earrings: []
   beard: []
