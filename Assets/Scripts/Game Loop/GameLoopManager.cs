@@ -176,7 +176,7 @@ public class GameLoopManager : MonoBehaviour
 
             // Wait for player to make a choice
             ChangeDialogueState(DialogueState.PlayerChoosing);
-            yield return StartCoroutine(WaitForPlayerChoice());
+            yield return WaitForPlayerChoice();
 
             // Dialogue completed
             ChangeDialogueState(DialogueState.Completed);

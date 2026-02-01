@@ -37,9 +37,9 @@ public class EntityOutfitProvider : MonoBehaviour
         System.Collections.Generic.List<OutfitLayer> layers = new System.Collections.Generic.List<OutfitLayer>(7);
         AddLayerIfSprite(layers, OutfitSlot.Hair, GetRandomSprite(outfit.hair));
         AddLayerIfSprite(layers, OutfitSlot.Eye, GetRandomSprite(outfit.eye));
-        AddLayerIfSprite(layers, OutfitSlot.Nose, GetRandomSprite(outfit.nose));
         AddLayerIfSprite(layers, OutfitSlot.Body, GetRandomSprite(outfit.body));
         AddLayerIfSprite(layers, OutfitSlot.Cloth, GetRandomSprite(outfit.cloth));
+        AddLayerIfSprite(layers, OutfitSlot.EyeBrown, GetRandomSprite(outfit.eyeBrown));
 
         if (outfit.gender == Gender.Female)
         {

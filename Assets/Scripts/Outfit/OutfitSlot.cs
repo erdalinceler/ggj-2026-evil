@@ -2,9 +2,9 @@ public enum OutfitSlot
 {
     Hair,
     Eye,
-    Nose,
     Body,
     Cloth,
+    EyeBrown,
     Earrings,
     Beard
 }

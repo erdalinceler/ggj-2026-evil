@@ -12,6 +12,7 @@ public class EntityOutfitApplier : MonoBehaviour
     [SerializeField] private SpriteRenderer noseRenderer;
     [SerializeField] private SpriteRenderer bodyRenderer;
     [SerializeField] private SpriteRenderer clothRenderer;
+    [SerializeField] private SpriteRenderer eyeBrownRenderer;
     [SerializeField] private SpriteRenderer earringsRenderer;
     [SerializeField] private SpriteRenderer beardRenderer;
 
@@ -100,6 +101,7 @@ public class EntityOutfitApplier : MonoBehaviour
         ClearRenderer(eyeRenderer);
         ClearRenderer(noseRenderer);
         ClearRenderer(bodyRenderer);
+        ClearRenderer(eyeBrownRenderer);
         ClearRenderer(clothRenderer);
         ClearRenderer(earringsRenderer);
         ClearRenderer(beardRenderer);
@@ -122,6 +124,7 @@ public class EntityOutfitApplier : MonoBehaviour
         SetRendererActive(eyeRenderer, active);
         SetRendererActive(noseRenderer, active);
         SetRendererActive(bodyRenderer, active);
+        SetRendererActive(eyeBrownRenderer, active);
         SetRendererActive(clothRenderer, active);
         SetRendererActive(earringsRenderer, active);
         SetRendererActive(beardRenderer, active);
@@ -155,10 +158,10 @@ public class EntityOutfitApplier : MonoBehaviour
                 return hairRenderer;
             case OutfitSlot.Eye:
                 return eyeRenderer;
-            case OutfitSlot.Nose:
-                return noseRenderer;
             case OutfitSlot.Body:
                 return bodyRenderer;
+            case OutfitSlot.EyeBrown:
+                return eyeBrownRenderer;
             case OutfitSlot.Cloth:
                 return clothRenderer;
             case OutfitSlot.Earrings:
